@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:get/get.dart';
 
 import 'controllers/main_controller.dart';
@@ -35,22 +36,26 @@ class MyApp extends GetView<MainController> {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      locale:
-          TranslationProvider.of(context).flutterLocale, // use provideraQ  8
-      supportedLocales: AppLocaleUtils.supportedLocales,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+    return Obx(() => MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          locale: TranslationProvider.of(context)
+              .flutterLocale, // use provideraQ  8
+          supportedLocales: AppLocaleUtils.supportedLocales,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
-      theme: ThemeData(
-        colorSchemeSeed: Colors.indigo,
-        useMaterial3: true,
-      ),
+          theme: ThemeData(
+            colorSchemeSeed: appColor,
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            colorSchemeSeed: appColor,
+            useMaterial3: true,
+          ),
 
-      // themeMode: controller.isDarkMode ? ThemeData.dark ? ThemeData.light,
-      themeMode: ThemeMode.dark,
+          themeMode: controller.isDarkMode() ? ThemeMode.dark : ThemeMode.light,
 
-      routerConfig: router,
-    );
+          routerConfig: router,
+        ));
   }
 }
