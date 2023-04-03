@@ -53,7 +53,7 @@ class MyApp extends GetView<MainController> {
             useMaterial3: true,
           ),
 
-          themeMode: controller.isDarkMode() ? ThemeMode.dark : ThemeMode.light,
+          themeMode: ThemeMode.values[controller.theme().index],
 
           routerConfig: router,
         ));

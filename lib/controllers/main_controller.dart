@@ -4,12 +4,13 @@ import 'package:get/get.dart';
 class MainController extends GetxController {
   RxInt page = 0.obs;
 
-  RxBool isDarkMode = true.obs;
-  RxBool isSystemTheme = false.obs;
-
   RxBool isStaticColor = true.obs;
+
+  var theme = themeMode.system.obs;
 
   var colorSeed = appColor.obs;
 
   // var themeMode = ThemeMode.system.obs;
 }
+
+enum themeMode { system, light, dark }

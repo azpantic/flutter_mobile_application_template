@@ -24,12 +24,11 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      controller.isDarkMode(Get.isPlatformDarkMode);
-                      controller.isSystemTheme(true);
+                      controller.theme(themeMode.system);
                     },
                     child: Obx(
                       () => Card(
-                        color: (controller.isSystemTheme()
+                        color: (controller.theme() == themeMode.system
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.background),
                         shape: RoundedRectangleBorder(
@@ -37,7 +36,7 @@ class ThemeToggle extends GetView<MainController> {
                                 BorderRadius.circular(appRoundRadius)),
                         child: Icon(
                           Icons.android,
-                          color: controller.isSystemTheme()
+                          color: controller.theme() == themeMode.system
                               ? context.theme.colorScheme.onPrimary
                               : context.theme.colorScheme.onBackground,
                         ),
@@ -60,13 +59,11 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      controller.isDarkMode(false);
-                      controller.isSystemTheme(false);
+                      controller.theme(themeMode.light);
                     },
                     child: Obx(
                       () => Card(
-                        color: (!controller.isSystemTheme() &&
-                                !controller.isDarkMode()
+                        color: (controller.theme() == themeMode.light
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.background),
                         shape: RoundedRectangleBorder(
@@ -74,8 +71,7 @@ class ThemeToggle extends GetView<MainController> {
                                 BorderRadius.circular(appRoundRadius)),
                         child: Icon(
                           Icons.sunny,
-                          color: !controller.isSystemTheme() &&
-                                  !controller.isDarkMode()
+                          color: controller.theme() == themeMode.light
                               ? context.theme.colorScheme.onPrimary
                               : context.theme.colorScheme.onBackground,
                         ),
@@ -98,13 +94,11 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      controller.isDarkMode(true);
-                      controller.isSystemTheme(false);
+                      controller.theme(themeMode.dark);
                     },
                     child: Obx(
                       () => Card(
-                        color: (!controller.isSystemTheme() &&
-                                controller.isDarkMode()
+                        color: (controller.theme() == themeMode.dark
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.background),
                         shape: RoundedRectangleBorder(
@@ -112,8 +106,7 @@ class ThemeToggle extends GetView<MainController> {
                                 BorderRadius.circular(appRoundRadius)),
                         child: Icon(
                           Icons.dark_mode,
-                          color: !controller.isSystemTheme() &&
-                                  controller.isDarkMode()
+                          color: controller.theme() == themeMode.dark
                               ? context.theme.colorScheme.onPrimary
                               : context.theme.colorScheme.onBackground,
                         ),
