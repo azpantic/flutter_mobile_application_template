@@ -4,14 +4,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
 import 'package:get/get.dart';
 
-class HomePage extends GetView<void> {
-  const HomePage({super.key});
+class CastomPage extends GetView<void> {
+  const CastomPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(t.navbar.homepage),
+          title: Text(t.navbar.castompage),
         ),
         body: const Placeholder());
   }
