@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
@@ -7,7 +8,19 @@ import 'i18n/strings.g.dart';
 import 'routes.dart';
 
 void main() {
+  settingUpSystemUIOverlay();
+
   runApp(TranslationProvider(child: const MyApp()));
+}
+
+void settingUpSystemUIOverlay() {
+// Setting SysemUIOverlay
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemStatusBarContrastEnforced: false,
+      systemNavigationBarColor: Colors.transparent,
+      systemNavigationBarDividerColor: Colors.transparent));
+// Setting SystmeUIMode
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 }
 
 class MyApp extends GetView<MainController> {
