@@ -22,10 +22,22 @@ class ThemeToggle extends GetView<MainController> {
               children: [
                 AspectRatio(
                   aspectRatio: 3 / 2,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(appRoundRadius)),
-                    child: const Icon(Icons.android),
+                  child: InkResponse(
+                    onTap: () {
+                      // controller.isDarkMode(ThemeMode.system.);
+                      controller.isSystemTheme(true);
+                    },
+                    child: Obx(
+                      () => Card(
+                        color: (controller.isSystemTheme()
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.background),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(appRoundRadius)),
+                        child: const Icon(Icons.android),
+                      ),
+                    ),
                   ),
                 ),
                 Text(t.settings.system_theme)
@@ -44,11 +56,19 @@ class ThemeToggle extends GetView<MainController> {
                   child: InkResponse(
                     onTap: () {
                       controller.isDarkMode(false);
+                      controller.isSystemTheme(false);
                     },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(appRoundRadius)),
-                      child: const Icon(Icons.sunny),
+                    child: Obx(
+                      () => Card(
+                        color: (!controller.isSystemTheme() &&
+                                !controller.isDarkMode()
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.background),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(appRoundRadius)),
+                        child: const Icon(Icons.sunny),
+                      ),
                     ),
                   ),
                 ),
@@ -68,11 +88,19 @@ class ThemeToggle extends GetView<MainController> {
                   child: InkResponse(
                     onTap: () {
                       controller.isDarkMode(true);
+                      controller.isSystemTheme(false);
                     },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(appRoundRadius)),
-                      child: const Icon(Icons.dark_mode),
+                    child: Obx(
+                      () => Card(
+                        color: (!controller.isSystemTheme() &&
+                                controller.isDarkMode()
+                            ? Theme.of(context).colorScheme.primary
+                            : Theme.of(context).colorScheme.background),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(appRoundRadius)),
+                        child: const Icon(Icons.dark_mode),
+                      ),
                     ),
                   ),
                 ),

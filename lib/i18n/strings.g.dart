@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 2
-/// Strings: 18 (9 per locale)
+/// Strings: 28 (14 per locale)
 ///
-/// Built on 2023-04-03 at 10:50 UTC
+/// Built on 2023-04-03 at 14:33 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -171,11 +171,16 @@ class _StringsSettingsEn {
 
 	// Translations
 	String get title => 'Settings';
+	String get general_settings => 'General';
+	String get visual_settings => 'Visual';
 	String get theme_mode => 'Theme';
 	String get system_theme => 'System';
 	String get dark_theme => 'Dark';
 	String get light_theme => 'Light';
-	String get color => 'Colors';
+	String get seed_color => 'Colors';
+	String get dynamic_color => 'Dynamic';
+	String get static_color => 'Static';
+	String get static_color_picker => 'Accent colors';
 }
 
 // Path: <root>
@@ -226,12 +231,17 @@ class _StringsSettingsRu implements _StringsSettingsEn {
 	@override final _StringsRu _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'Найстройки';
+	@override String get title => 'Настройки';
+	@override String get general_settings => 'Основные';
+	@override String get visual_settings => 'Визуал';
 	@override String get theme_mode => 'Тема';
 	@override String get system_theme => 'Системная';
 	@override String get dark_theme => 'Темная';
 	@override String get light_theme => 'Светлая';
-	@override String get color => 'Цвета';
+	@override String get seed_color => 'Цвета';
+	@override String get dynamic_color => 'Динамические';
+	@override String get static_color => 'Статические';
+	@override String get static_color_picker => 'Акцентные цвета';
 }
 
 /// Flat map(s) containing all translations.
@@ -244,11 +254,16 @@ extension on _StringsEn {
 			case 'navbar.castompage': return 'CastomPage';
 			case 'navbar.profile': return 'Profile';
 			case 'settings.title': return 'Settings';
+			case 'settings.general_settings': return 'General';
+			case 'settings.visual_settings': return 'Visual';
 			case 'settings.theme_mode': return 'Theme';
 			case 'settings.system_theme': return 'System';
 			case 'settings.dark_theme': return 'Dark';
 			case 'settings.light_theme': return 'Light';
-			case 'settings.color': return 'Colors';
+			case 'settings.seed_color': return 'Colors';
+			case 'settings.dynamic_color': return 'Dynamic';
+			case 'settings.static_color': return 'Static';
+			case 'settings.static_color_picker': return 'Accent colors';
 			default: return null;
 		}
 	}
@@ -260,12 +275,17 @@ extension on _StringsRu {
 			case 'navbar.homepage': return 'Главная';
 			case 'navbar.castompage': return 'Кастомная';
 			case 'navbar.profile': return 'Профиль';
-			case 'settings.title': return 'Найстройки';
+			case 'settings.title': return 'Настройки';
+			case 'settings.general_settings': return 'Основные';
+			case 'settings.visual_settings': return 'Визуал';
 			case 'settings.theme_mode': return 'Тема';
 			case 'settings.system_theme': return 'Системная';
 			case 'settings.dark_theme': return 'Темная';
 			case 'settings.light_theme': return 'Светлая';
-			case 'settings.color': return 'Цвета';
+			case 'settings.seed_color': return 'Цвета';
+			case 'settings.dynamic_color': return 'Динамические';
+			case 'settings.static_color': return 'Статические';
+			case 'settings.static_color_picker': return 'Акцентные цвета';
 			default: return null;
 		}
 	}

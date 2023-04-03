@@ -5,6 +5,9 @@ class MainController extends GetxController {
   RxInt page = 0.obs;
 
   RxBool isDarkMode = true.obs;
+  RxBool isSystemTheme = false.obs;
+
+  RxBool isStaticColor = true.obs;
 
   var colorSeed = appColor.obs;
 

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:flutter_mobile_application_template/controllers/main_controller.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
+import 'package:flutter_mobile_application_template/widgets/settings_subpage_widgets/seed_color_toogle.dart';
 import 'package:flutter_mobile_application_template/widgets/settings_subpage_widgets/theme_toogle.dart';
 import 'package:get/get.dart';
 
@@ -13,17 +12,49 @@ class SettingsSubpage extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(t.settings.title),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(appPadding),
-            child: ThemeToggle(),
-          )
-        ],
-      ),
-    );
+        appBar: AppBar(
+          title: Text(t.settings.title),
+          backgroundColor: Colors.transparent,
+        ),
+        body: SingleChildScrollView(
+          child: Column(children: [
+            ExpansionTile(
+              title: Text(
+                t.settings.general_settings,
+              ),
+              children: [
+                Container(),
+              ],
+            ),
+            ExpansionTile(
+              title: Text(t.settings.visual_settings),
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      t.settings.theme_mode,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(appPadding),
+                      child: ThemeToggle(),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Text(
+                      t.settings.seed_color,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(appPadding),
+                      child: SeedColorToogle(),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ]),
+        ));
   }
 }
