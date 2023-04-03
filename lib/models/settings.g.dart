@@ -17,15 +17,26 @@ const SettingsSchema = CollectionSchema(
   name: r'Settings',
   id: -8656046621518759136,
   properties: {
-    r'darkTheme': PropertySchema(
+    r'colorSeed': PropertySchema(
       id: 0,
-      name: r'darkTheme',
+      name: r'colorSeed',
+      type: IsarType.string,
+    ),
+    r'isStaticColor': PropertySchema(
+      id: 1,
+      name: r'isStaticColor',
       type: IsarType.bool,
     ),
     r'lang': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'lang',
       type: IsarType.string,
+    ),
+    r'theme': PropertySchema(
+      id: 3,
+      name: r'theme',
+      type: IsarType.byte,
+      enumMap: _SettingsthemeEnumValueMap,
     )
   },
   estimateSize: _settingsEstimateSize,
@@ -48,6 +59,7 @@ int _settingsEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
+  bytesCount += 3 + object.colorSeed.length * 3;
   {
     final value = object.lang;
     if (value != null) {
@@ -63,8 +75,10 @@ void _settingsSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeBool(offsets[0], object.darkTheme);
-  writer.writeString(offsets[1], object.lang);
+  writer.writeString(offsets[0], object.colorSeed);
+  writer.writeBool(offsets[1], object.isStaticColor);
+  writer.writeString(offsets[2], object.lang);
+  writer.writeByte(offsets[3], object.theme.index);
 }
 
 Settings _settingsDeserialize(
@@ -74,9 +88,13 @@ Settings _settingsDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Settings();
-  object.darkTheme = reader.readBoolOrNull(offsets[0]);
+  object.colorSeed = reader.readString(offsets[0]);
   object.id = id;
-  object.lang = reader.readStringOrNull(offsets[1]);
+  object.isStaticColor = reader.readBool(offsets[1]);
+  object.lang = reader.readStringOrNull(offsets[2]);
+  object.theme =
+      _SettingsthemeValueEnumMap[reader.readByteOrNull(offsets[3])] ??
+          themeMode.system;
   return object;
 }
 
@@ -88,13 +106,29 @@ P _settingsDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readBoolOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 1:
+      return (reader.readBool(offset)) as P;
+    case 2:
       return (reader.readStringOrNull(offset)) as P;
+    case 3:
+      return (_SettingsthemeValueEnumMap[reader.readByteOrNull(offset)] ??
+          themeMode.system) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
 }
+
+const _SettingsthemeEnumValueMap = {
+  'system': 0,
+  'light': 1,
+  'dark': 2,
+};
+const _SettingsthemeValueEnumMap = {
+  0: themeMode.system,
+  1: themeMode.light,
+  2: themeMode.dark,
+};
 
 Id _settingsGetId(Settings object) {
   return object.id;
@@ -185,28 +219,133 @@ extension SettingsQueryWhere on QueryBuilder<Settings, Settings, QWhereClause> {
 
 extension SettingsQueryFilter
     on QueryBuilder<Settings, Settings, QFilterCondition> {
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> darkThemeIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'darkTheme',
-      ));
-    });
-  }
-
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> darkThemeIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'darkTheme',
-      ));
-    });
-  }
-
-  QueryBuilder<Settings, Settings, QAfterFilterCondition> darkThemeEqualTo(
-      bool? value) {
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'darkTheme',
+        property: r'colorSeed',
         value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'colorSeed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'colorSeed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'colorSeed',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'colorSeed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'colorSeed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'colorSeed',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'colorSeed',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> colorSeedIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'colorSeed',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition>
+      colorSeedIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'colorSeed',
+        value: '',
       ));
     });
   }
@@ -259,6 +398,16 @@ extension SettingsQueryFilter
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> isStaticColorEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'isStaticColor',
+        value: value,
       ));
     });
   }
@@ -408,6 +557,59 @@ extension SettingsQueryFilter
       ));
     });
   }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> themeEqualTo(
+      themeMode value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'theme',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> themeGreaterThan(
+    themeMode value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'theme',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> themeLessThan(
+    themeMode value, {
+    bool include = false,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'theme',
+        value: value,
+      ));
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterFilterCondition> themeBetween(
+    themeMode lower,
+    themeMode upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'theme',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+      ));
+    });
+  }
 }
 
 extension SettingsQueryObject
@@ -417,15 +619,27 @@ extension SettingsQueryLinks
     on QueryBuilder<Settings, Settings, QFilterCondition> {}
 
 extension SettingsQuerySortBy on QueryBuilder<Settings, Settings, QSortBy> {
-  QueryBuilder<Settings, Settings, QAfterSortBy> sortByDarkTheme() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByColorSeed() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'darkTheme', Sort.asc);
+      return query.addSortBy(r'colorSeed', Sort.asc);
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterSortBy> sortByDarkThemeDesc() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByColorSeedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'darkTheme', Sort.desc);
+      return query.addSortBy(r'colorSeed', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByIsStaticColor() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isStaticColor', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByIsStaticColorDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isStaticColor', Sort.desc);
     });
   }
 
@@ -440,19 +654,31 @@ extension SettingsQuerySortBy on QueryBuilder<Settings, Settings, QSortBy> {
       return query.addSortBy(r'lang', Sort.desc);
     });
   }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByTheme() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> sortByThemeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.desc);
+    });
+  }
 }
 
 extension SettingsQuerySortThenBy
     on QueryBuilder<Settings, Settings, QSortThenBy> {
-  QueryBuilder<Settings, Settings, QAfterSortBy> thenByDarkTheme() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByColorSeed() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'darkTheme', Sort.asc);
+      return query.addSortBy(r'colorSeed', Sort.asc);
     });
   }
 
-  QueryBuilder<Settings, Settings, QAfterSortBy> thenByDarkThemeDesc() {
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByColorSeedDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'darkTheme', Sort.desc);
+      return query.addSortBy(r'colorSeed', Sort.desc);
     });
   }
 
@@ -468,6 +694,18 @@ extension SettingsQuerySortThenBy
     });
   }
 
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByIsStaticColor() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isStaticColor', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByIsStaticColorDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'isStaticColor', Sort.desc);
+    });
+  }
+
   QueryBuilder<Settings, Settings, QAfterSortBy> thenByLang() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'lang', Sort.asc);
@@ -479,13 +717,32 @@ extension SettingsQuerySortThenBy
       return query.addSortBy(r'lang', Sort.desc);
     });
   }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByTheme() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QAfterSortBy> thenByThemeDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'theme', Sort.desc);
+    });
+  }
 }
 
 extension SettingsQueryWhereDistinct
     on QueryBuilder<Settings, Settings, QDistinct> {
-  QueryBuilder<Settings, Settings, QDistinct> distinctByDarkTheme() {
+  QueryBuilder<Settings, Settings, QDistinct> distinctByColorSeed(
+      {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'darkTheme');
+      return query.addDistinctBy(r'colorSeed', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QDistinct> distinctByIsStaticColor() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'isStaticColor');
     });
   }
 
@@ -493,6 +750,12 @@ extension SettingsQueryWhereDistinct
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'lang', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Settings, Settings, QDistinct> distinctByTheme() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'theme');
     });
   }
 }
@@ -505,15 +768,27 @@ extension SettingsQueryProperty
     });
   }
 
-  QueryBuilder<Settings, bool?, QQueryOperations> darkThemeProperty() {
+  QueryBuilder<Settings, String, QQueryOperations> colorSeedProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'darkTheme');
+      return query.addPropertyName(r'colorSeed');
+    });
+  }
+
+  QueryBuilder<Settings, bool, QQueryOperations> isStaticColorProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'isStaticColor');
     });
   }
 
   QueryBuilder<Settings, String?, QQueryOperations> langProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'lang');
+    });
+  }
+
+  QueryBuilder<Settings, themeMode, QQueryOperations> themeProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'theme');
     });
   }
 }

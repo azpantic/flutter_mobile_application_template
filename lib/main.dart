@@ -3,13 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:get/get.dart';
+import 'package:isar/isar.dart';
 
 import 'controllers/main_controller.dart';
 import 'i18n/strings.g.dart';
+import 'models/settings.dart';
 import 'routes.dart';
 
-void main() {
-  Get.put(MainController());
+Future<void> main() async {
+  Get.put(MainController(), permanent: true);
+
   WidgetsFlutterBinding.ensureInitialized();
   // settingsData!.lang == null
   //     ? LocaleSettings.useDeviceLocale()
@@ -44,16 +47,16 @@ class MyApp extends GetView<MainController> {
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
           theme: ThemeData(
-            colorSchemeSeed: controller.colorSeed(),
+            // colorSchemeSeed: controller.settings().colorSeed,
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            colorSchemeSeed: controller.colorSeed(),
+            // colorSchemeSeed: controller.colorSeed(),
             useMaterial3: true,
           ),
 
-          themeMode: ThemeMode.values[controller.theme().index],
+          themeMode: ThemeMode.values[controller.settings().theme.index],
 
           routerConfig: router,
         ));

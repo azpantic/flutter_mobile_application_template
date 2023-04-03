@@ -24,11 +24,12 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      controller.theme(themeMode.system);
+                      controller.settings
+                          .update((s) => s?.theme = themeMode.system);
                     },
                     child: Obx(
                       () => Card(
-                        color: (controller.theme() == themeMode.system
+                        color: (controller.settings().theme == themeMode.system
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.background),
                         shape: RoundedRectangleBorder(
@@ -36,7 +37,7 @@ class ThemeToggle extends GetView<MainController> {
                                 BorderRadius.circular(appRoundRadius)),
                         child: Icon(
                           Icons.android,
-                          color: controller.theme() == themeMode.system
+                          color: controller.settings().theme == themeMode.system
                               ? context.theme.colorScheme.onPrimary
                               : context.theme.colorScheme.onBackground,
                         ),
@@ -59,11 +60,12 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      controller.theme(themeMode.light);
+                      controller.settings
+                          .update((val) => val?.theme = themeMode.light);
                     },
                     child: Obx(
                       () => Card(
-                        color: (controller.theme() == themeMode.light
+                        color: (controller.settings().theme == themeMode.light
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.background),
                         shape: RoundedRectangleBorder(
@@ -71,7 +73,7 @@ class ThemeToggle extends GetView<MainController> {
                                 BorderRadius.circular(appRoundRadius)),
                         child: Icon(
                           Icons.sunny,
-                          color: controller.theme() == themeMode.light
+                          color: controller.settings().theme == themeMode.light
                               ? context.theme.colorScheme.onPrimary
                               : context.theme.colorScheme.onBackground,
                         ),
@@ -94,11 +96,12 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      controller.theme(themeMode.dark);
+                      controller.settings
+                          .update((val) => val?.theme = themeMode.dark);
                     },
                     child: Obx(
                       () => Card(
-                        color: (controller.theme() == themeMode.dark
+                        color: (controller.settings().theme == themeMode.dark
                             ? Theme.of(context).colorScheme.primary
                             : Theme.of(context).colorScheme.background),
                         shape: RoundedRectangleBorder(
@@ -106,7 +109,7 @@ class ThemeToggle extends GetView<MainController> {
                                 BorderRadius.circular(appRoundRadius)),
                         child: Icon(
                           Icons.dark_mode,
-                          color: controller.theme() == themeMode.dark
+                          color: controller.settings().theme == themeMode.dark
                               ? context.theme.colorScheme.onPrimary
                               : context.theme.colorScheme.onBackground,
                         ),
