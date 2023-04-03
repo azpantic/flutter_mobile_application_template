@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobile_application_template/pages/subpages/settings_subpage.dart';
+import 'package:flutter_mobile_application_template/subpages/settings_subpage.dart';
 
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
