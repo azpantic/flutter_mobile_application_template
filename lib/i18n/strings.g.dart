@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 2
-/// Strings: 6 (3 per locale)
+/// Strings: 18 (9 per locale)
 ///
-/// Built on 2023-04-03 at 08:23 UTC
+/// Built on 2023-04-03 at 10:50 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -148,6 +148,7 @@ class _StringsEn implements BaseTranslations<AppLocale, _StringsEn> {
 
 	// Translations
 	late final _StringsNavbarEn navbar = _StringsNavbarEn._(_root);
+	late final _StringsSettingsEn settings = _StringsSettingsEn._(_root);
 }
 
 // Path: navbar
@@ -160,6 +161,21 @@ class _StringsNavbarEn {
 	String get homepage => 'Home';
 	String get castompage => 'CastomPage';
 	String get profile => 'Profile';
+}
+
+// Path: settings
+class _StringsSettingsEn {
+	_StringsSettingsEn._(this._root);
+
+	final _StringsEn _root; // ignore: unused_field
+
+	// Translations
+	String get title => 'Settings';
+	String get theme_mode => 'Theme';
+	String get system_theme => 'System';
+	String get dark_theme => 'Dark';
+	String get light_theme => 'Light';
+	String get color => 'Colors';
 }
 
 // Path: <root>
@@ -188,6 +204,7 @@ class _StringsRu implements _StringsEn {
 
 	// Translations
 	@override late final _StringsNavbarRu navbar = _StringsNavbarRu._(_root);
+	@override late final _StringsSettingsRu settings = _StringsSettingsRu._(_root);
 }
 
 // Path: navbar
@@ -202,6 +219,21 @@ class _StringsNavbarRu implements _StringsNavbarEn {
 	@override String get profile => 'Профиль';
 }
 
+// Path: settings
+class _StringsSettingsRu implements _StringsSettingsEn {
+	_StringsSettingsRu._(this._root);
+
+	@override final _StringsRu _root; // ignore: unused_field
+
+	// Translations
+	@override String get title => 'Найстройки';
+	@override String get theme_mode => 'Тема';
+	@override String get system_theme => 'Системная';
+	@override String get dark_theme => 'Темная';
+	@override String get light_theme => 'Светлая';
+	@override String get color => 'Цвета';
+}
+
 /// Flat map(s) containing all translations.
 /// Only for edge cases! For simple maps, use the map function of this library.
 
@@ -211,6 +243,12 @@ extension on _StringsEn {
 			case 'navbar.homepage': return 'Home';
 			case 'navbar.castompage': return 'CastomPage';
 			case 'navbar.profile': return 'Profile';
+			case 'settings.title': return 'Settings';
+			case 'settings.theme_mode': return 'Theme';
+			case 'settings.system_theme': return 'System';
+			case 'settings.dark_theme': return 'Dark';
+			case 'settings.light_theme': return 'Light';
+			case 'settings.color': return 'Colors';
 			default: return null;
 		}
 	}
@@ -222,6 +260,12 @@ extension on _StringsRu {
 			case 'navbar.homepage': return 'Главная';
 			case 'navbar.castompage': return 'Кастомная';
 			case 'navbar.profile': return 'Профиль';
+			case 'settings.title': return 'Найстройки';
+			case 'settings.theme_mode': return 'Тема';
+			case 'settings.system_theme': return 'Системная';
+			case 'settings.dark_theme': return 'Темная';
+			case 'settings.light_theme': return 'Светлая';
+			case 'settings.color': return 'Цвета';
 			default: return null;
 		}
 	}

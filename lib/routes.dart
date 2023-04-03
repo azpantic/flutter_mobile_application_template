@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobile_application_template/subpages/settings_subpage.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 
@@ -47,7 +48,6 @@ final router = GoRouter(
               // Используем context.go для перехода к нужному маршруту при нажатии на вкладку
               onDestinationSelected: (index) {
                 _controller.page(index);
-                _controller.isDarkMode(false);
                 return context.go(
                   ['/home', '/custom', '/profile'][index],
                 );
@@ -80,7 +80,17 @@ final router = GoRouter(
             key: state.pageKey,
             child: ProfilePage(),
           ),
-          routes: [],
+          routes: [
+            GoRoute(
+              parentNavigatorKey: _rootNavigationKey,
+              path: 'settings',
+              pageBuilder: (context, state) => MaterialPage<void>(
+                key: state.pageKey,
+                child: SettingsSubpage(),
+              ),
+              routes: [],
+            ),
+          ],
         ),
       ],
     ),

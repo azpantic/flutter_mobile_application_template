@@ -44,12 +44,12 @@ class MyApp extends GetView<MainController> {
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
           theme: ThemeData(
-            colorSchemeSeed: appColor,
+            colorSchemeSeed: controller.colorSeed(),
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            colorSchemeSeed: appColor,
+            colorSchemeSeed: controller.colorSeed(),
             useMaterial3: true,
           ),
 
