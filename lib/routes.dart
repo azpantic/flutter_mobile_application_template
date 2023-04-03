@@ -6,16 +6,16 @@ import 'controllers/main_controller.dart';
 import 'i18n/strings.g.dart';
 import 'pages/home_page.dart';
 
-final _controller = MainController();
-final _rootNabigationKey = GlobalKey<NavigatorState>();
-final _shellNabigationKey = GlobalKey<NavigatorState>();
+final MainController _controller = Get.find();
+final _rootNavigationKey = GlobalKey<NavigatorState>();
+final _shellNavigationKey = GlobalKey<NavigatorState>();
 
 final router = GoRouter(
-  navigatorKey: _rootNabigationKey,
+  navigatorKey: _rootNavigationKey,
   initialLocation: '/home',
   routes: [
     ShellRoute(
-      navigatorKey: _shellNabigationKey,
+      navigatorKey: _shellNavigationKey,
       // ShellRoute показывает UI-оболочку вокруг соответствующего дочернего маршрута
       builder: (context, state, child) {
         // UI-оболочка - это Scaffold с NavigationBar
