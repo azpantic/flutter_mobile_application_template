@@ -21,36 +21,40 @@ final router = GoRouter(
       // ShellRoute показывает UI-оболочку вокруг соответствующего дочернего маршрута
       builder: (context, state, child) {
         // UI-оболочка - это Scaffold с NavigationBar
-        return Obx(() => Scaffold(
-              body: child,
-              bottomNavigationBar: NavigationBar(
-                  selectedIndex: _controller.page(),
-                  // Используем tabs для создания NavigationBarDestination
-                  destinations: [
-                    NavigationDestination(
-                      selectedIcon: const Icon(Icons.home),
-                      icon: const Icon(Icons.home_outlined),
-                      label: t.navbar.homepage,
-                    ),
-                    NavigationDestination(
-                      selectedIcon: const Icon(Icons.library_books),
-                      icon: const Icon(Icons.library_books_outlined),
-                      label: t.navbar.castompage,
-                    ),
-                    NavigationDestination(
-                      selectedIcon: const Icon(Icons.person_2),
-                      icon: const Icon(Icons.person_2_outlined),
-                      label: t.navbar.profile,
-                    )
-                  ],
-                  // Используем context.go для перехода к нужному маршруту при нажатии на вкладку
-                  onDestinationSelected: (index) {
-                    _controller.page(index);
-                    return context.go(
-                      ['/home', '/custom', '/profile'][index],
-                    );
-                  }),
-            ));
+        return Obx(
+          () => Scaffold(
+            body: child,
+            bottomNavigationBar: NavigationBar(
+              selectedIndex: _controller.page(),
+              // Используем tabs для создания NavigationBarDestination
+              destinations: [
+                NavigationDestination(
+                  selectedIcon: const Icon(Icons.home),
+                  icon: const Icon(Icons.home_outlined),
+                  label: t.navbar.homepage,
+                ),
+                NavigationDestination(
+                  selectedIcon: const Icon(Icons.library_books),
+                  icon: const Icon(Icons.library_books_outlined),
+                  label: t.navbar.castompage,
+                ),
+                NavigationDestination(
+                  selectedIcon: const Icon(Icons.person_2),
+                  icon: const Icon(Icons.person_2_outlined),
+                  label: t.navbar.profile,
+                )
+              ],
+              // Используем context.go для перехода к нужному маршруту при нажатии на вкладку
+              onDestinationSelected: (index) {
+                _controller.page(index);
+                _controller.isDarkMode(false);
+                return context.go(
+                  ['/home', '/custom', '/profile'][index],
+                );
+              },
+            ),
+          ),
+        );
       },
       // Вложенные маршруты для каждой вкладки
       routes: [

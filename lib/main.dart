@@ -46,11 +46,8 @@ class MyApp extends GetView<MainController> {
         colorSchemeSeed: Colors.indigo,
         useMaterial3: true,
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorSchemeSeed: Colors.indigo,
-        useMaterial3: true,
-      ),
+
+      // themeMode: controller.isDarkMode ? ThemeData.dark ? ThemeData.light,
       themeMode: ThemeMode.dark,
 
       routerConfig: router,

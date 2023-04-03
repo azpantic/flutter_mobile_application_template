@@ -11,7 +11,16 @@ class ProfilePage extends GetView<void> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(t.navbar.profile),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(t.navbar.profile),
+              IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.settings),
+              ),
+            ],
+          ),
         ),
         body: const Placeholder());
   }
