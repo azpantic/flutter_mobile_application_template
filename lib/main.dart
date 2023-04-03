@@ -8,8 +8,6 @@ import 'i18n/strings.g.dart';
 import 'routes.dart';
 
 void main() {
-  settingUpSystemUIOverlay();
-
   runApp(TranslationProvider(child: const MyApp()));
 }
 
