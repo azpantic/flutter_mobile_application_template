@@ -4,7 +4,9 @@ import 'package:go_router/go_router.dart';
 
 import 'controllers/main_controller.dart';
 import 'i18n/strings.g.dart';
+import 'pages/castom_page.dart';
 import 'pages/home_page.dart';
+import 'pages/profile_page.dart';
 
 final _controller = MainController();
 final _rootNabigationKey = GlobalKey<NavigatorState>();
@@ -45,7 +47,11 @@ final router = GoRouter(
                   onDestinationSelected: (index) {
                     _controller.page(index);
                     return context.go(
-                      ['/home', '/castompage', '/profile'][index],
+                      [
+                        "/${t.navbar.homepage}",
+                        '/castompage',
+                        '/profile'
+                      ][index],
                     );
                   }),
             ));
@@ -53,8 +59,8 @@ final router = GoRouter(
       // Вложенные маршруты для каждой вкладки
       routes: [
         GoRoute(
-          path: "/home",
-          pageBuilder: (context, state) => MaterialPage<void>(
+          path: "/${t.navbar.homepage}",
+          pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: HomePage(),
           ),
@@ -62,7 +68,7 @@ final router = GoRouter(
         ),
         GoRoute(
           path: '/castompage',
-          pageBuilder: (context, state) => MaterialPage<void>(
+          pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: CastomPage(),
           ),
@@ -70,7 +76,7 @@ final router = GoRouter(
         ),
         GoRoute(
           path: '/profile',
-          pageBuilder: (context, state) => MaterialPage<void>(
+          pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: ProfilePage(),
           ),
