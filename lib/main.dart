@@ -7,6 +7,13 @@ import 'i18n/strings.g.dart';
 import 'routes.dart';
 
 void main() {
+  Get.put(MainController());
+  WidgetsFlutterBinding.ensureInitialized();
+  // settingsData!.lang == null
+  //     ? LocaleSettings.useDeviceLocale()
+  //     : LocaleSettings.setLocale(AppLocale.values.singleWhere(
+  //         (element) => element.languageCode == settingsData?.lang));
+  LocaleSettings.useDeviceLocale();
   runApp(TranslationProvider(child: const MyApp()));
 }
 

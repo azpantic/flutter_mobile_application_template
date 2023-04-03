@@ -47,11 +47,7 @@ final router = GoRouter(
                   onDestinationSelected: (index) {
                     _controller.page(index);
                     return context.go(
-                      [
-                        "/${t.navbar.homepage}",
-                        '/castompage',
-                        '/profile'
-                      ][index],
+                      ['/home', '/custom', '/profile'][index],
                     );
                   }),
             ));
@@ -59,7 +55,7 @@ final router = GoRouter(
       // Вложенные маршруты для каждой вкладки
       routes: [
         GoRoute(
-          path: "/${t.navbar.homepage}",
+          path: '/home',
           pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: HomePage(),
@@ -67,7 +63,7 @@ final router = GoRouter(
           routes: [],
         ),
         GoRoute(
-          path: '/castompage',
+          path: '/custom',
           pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: CastomPage(),
