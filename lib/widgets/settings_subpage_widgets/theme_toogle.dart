@@ -24,7 +24,7 @@ class ThemeToggle extends GetView<MainController> {
                   aspectRatio: 3 / 2,
                   child: InkResponse(
                     onTap: () {
-                      // controller.isDarkMode(ThemeMode.system.);
+                      controller.isDarkMode(Get.isPlatformDarkMode);
                       controller.isSystemTheme(true);
                     },
                     child: Obx(
@@ -35,7 +35,12 @@ class ThemeToggle extends GetView<MainController> {
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(appRoundRadius)),
-                        child: const Icon(Icons.android),
+                        child: Icon(
+                          Icons.android,
+                          color: controller.isSystemTheme()
+                              ? context.theme.colorScheme.onPrimary
+                              : context.theme.colorScheme.onBackground,
+                        ),
                       ),
                     ),
                   ),
@@ -67,7 +72,13 @@ class ThemeToggle extends GetView<MainController> {
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(appRoundRadius)),
-                        child: const Icon(Icons.sunny),
+                        child: Icon(
+                          Icons.sunny,
+                          color: !controller.isSystemTheme() &&
+                                  !controller.isDarkMode()
+                              ? context.theme.colorScheme.onPrimary
+                              : context.theme.colorScheme.onBackground,
+                        ),
                       ),
                     ),
                   ),
@@ -99,7 +110,13 @@ class ThemeToggle extends GetView<MainController> {
                         shape: RoundedRectangleBorder(
                             borderRadius:
                                 BorderRadius.circular(appRoundRadius)),
-                        child: const Icon(Icons.dark_mode),
+                        child: Icon(
+                          Icons.dark_mode,
+                          color: !controller.isSystemTheme() &&
+                                  controller.isDarkMode()
+                              ? context.theme.colorScheme.onPrimary
+                              : context.theme.colorScheme.onBackground,
+                        ),
                       ),
                     ),
                   ),

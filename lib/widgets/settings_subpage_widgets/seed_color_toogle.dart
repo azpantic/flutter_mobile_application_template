@@ -24,6 +24,8 @@ class SeedColorToogle extends GetView<MainController> {
                       AspectRatio(
                         aspectRatio: 2 / 1,
                         child: InkResponse(
+                          // containedInkWell: true,
+                          radius: 0,
                           onTap: () {
                             controller.isStaticColor(false);
                           },
@@ -36,7 +38,12 @@ class SeedColorToogle extends GetView<MainController> {
                                 borderRadius:
                                     BorderRadius.circular(appRoundRadius),
                               ),
-                              child: const Icon(Icons.color_lens),
+                              child: Icon(
+                                Icons.color_lens,
+                                color: !controller.isStaticColor()
+                                    ? context.theme.colorScheme.onPrimary
+                                    : context.theme.colorScheme.onBackground,
+                              ),
                             ),
                           ),
                         ),
@@ -55,6 +62,7 @@ class SeedColorToogle extends GetView<MainController> {
                       AspectRatio(
                         aspectRatio: 2 / 1,
                         child: InkResponse(
+                          radius: 0,
                           onTap: () {
                             controller.isStaticColor(true);
                           },
@@ -67,7 +75,12 @@ class SeedColorToogle extends GetView<MainController> {
                                 borderRadius:
                                     BorderRadius.circular(appRoundRadius),
                               ),
-                              child: Icon(Icons.color_lens),
+                              child: Icon(
+                                Icons.color_lens,
+                                color: controller.isStaticColor()
+                                    ? context.theme.colorScheme.onPrimary
+                                    : context.theme.colorScheme.onBackground,
+                              ),
                             ),
                           ),
                         ),
