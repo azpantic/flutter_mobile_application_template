@@ -12,49 +12,50 @@ class SettingsSubpage extends GetView<MainController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(t.settings.title),
-          backgroundColor: Colors.transparent,
-        ),
-        body: SingleChildScrollView(
-          child: Column(children: [
+      appBar: AppBar(
+        title: Text(t.settings.title),
+        backgroundColor: Colors.transparent,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
             ExpansionTile(
               title: Text(
                 t.settings.general_settings,
               ),
+              trailing: const Icon(Icons.settings),
               children: [
-                Container(),
+                Text(t.settings.language),
               ],
             ),
             ExpansionTile(
               title: Text(t.settings.visual_settings),
+              trailing: const Icon(Icons.color_lens),
               children: [
-                Column(
-                  children: [
-                    Text(
-                      t.settings.theme_mode,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(appPadding),
-                      child: ThemeToggle(),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      t.settings.seed_color,
-                      style: Theme.of(context).textTheme.titleLarge,
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(appPadding),
-                      child: SeedColorToogle(),
-                    ),
-                  ],
+                Text(
+                  t.settings.theme_mode,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(appPadding),
+                  child: ThemeToggle(),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  t.settings.seed_color,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const Padding(
+                  padding: EdgeInsets.all(appPadding),
+                  child: SeedColorToogle(),
                 ),
               ],
             ),
-          ]),
-        ));
+          ],
+        ),
+      ),
+    );
   }
 }

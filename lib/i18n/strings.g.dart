@@ -1,9 +1,9 @@
 /// Generated file. Do not edit.
 ///
 /// Locales: 2
-/// Strings: 28 (14 per locale)
+/// Strings: 30 (15 per locale)
 ///
-/// Built on 2023-04-03 at 14:33 UTC
+/// Built on 2023-04-03 at 14:46 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
@@ -172,6 +172,7 @@ class _StringsSettingsEn {
 	// Translations
 	String get title => 'Settings';
 	String get general_settings => 'General';
+	String get language => 'Language';
 	String get visual_settings => 'Visual';
 	String get theme_mode => 'Theme';
 	String get system_theme => 'System';
@@ -233,6 +234,7 @@ class _StringsSettingsRu implements _StringsSettingsEn {
 	// Translations
 	@override String get title => 'Настройки';
 	@override String get general_settings => 'Основные';
+	@override String get language => 'Язык';
 	@override String get visual_settings => 'Визуал';
 	@override String get theme_mode => 'Тема';
 	@override String get system_theme => 'Системная';
@@ -255,6 +257,7 @@ extension on _StringsEn {
 			case 'navbar.profile': return 'Profile';
 			case 'settings.title': return 'Settings';
 			case 'settings.general_settings': return 'General';
+			case 'settings.language': return 'Language';
 			case 'settings.visual_settings': return 'Visual';
 			case 'settings.theme_mode': return 'Theme';
 			case 'settings.system_theme': return 'System';
@@ -277,6 +280,7 @@ extension on _StringsRu {
 			case 'navbar.profile': return 'Профиль';
 			case 'settings.title': return 'Настройки';
 			case 'settings.general_settings': return 'Основные';
+			case 'settings.language': return 'Язык';
 			case 'settings.visual_settings': return 'Визуал';
 			case 'settings.theme_mode': return 'Тема';
 			case 'settings.system_theme': return 'Системная';
