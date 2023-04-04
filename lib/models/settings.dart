@@ -10,7 +10,7 @@ class Settings {
   Id id = Isar.autoIncrement;
   String? lang;
   bool isStaticColor = false;
-  String colorSeed = appColor.value.toString();
+  int colorSeed = appColor.value;
 
   @enumerated
   themeMode theme = themeMode.system;

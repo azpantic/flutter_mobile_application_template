@@ -111,8 +111,8 @@ class SeedColorToogle extends GetView<MainController> {
                     padding: const EdgeInsets.all(appPadding / 2),
                     child: InkResponse(
                       onTap: () {
-                        controller.settings.update((val) => val?.colorSeed =
-                            staticColorAccent[index].value.toString());
+                        controller.settings.update((val) =>
+                            val?.colorSeed = staticColorAccent[index].value);
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -121,7 +121,7 @@ class SeedColorToogle extends GetView<MainController> {
                         ),
                         child: AspectRatio(
                           aspectRatio: 1,
-                          child: (staticColorAccent[index] ==
+                          child: (staticColorAccent[index].value ==
                                   controller.settings().colorSeed
                               ? const Icon(Icons.check)
                               : null),
