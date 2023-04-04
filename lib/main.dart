@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:get/get.dart';
-import 'package:isar/isar.dart';
 
 import 'controllers/main_controller.dart';
 import 'i18n/strings.g.dart';
