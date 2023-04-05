@@ -36,28 +36,31 @@ void settingUpSystemUIOverlay() {
 
 class MyApp extends GetView<MainController> {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Obx(() => MaterialApp.router(
-          debugShowCheckedModeBanner: false,
-          locale: TranslationProvider.of(context)
-              .flutterLocale, // use provideraQ  8
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+    return Obx(
+      () => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        locale:
+            TranslationProvider.of(context).flutterLocale, // use provideraQ  8
+        supportedLocales: AppLocaleUtils.supportedLocales,
+        localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
-          theme: ThemeData(
-            colorSchemeSeed: controller.colorSeed(),
-            useMaterial3: true,
-          ),
-          darkTheme: ThemeData(
-            brightness: Brightness.dark,
-            colorSchemeSeed: controller.colorSeed(),
-            useMaterial3: true,
-          ),
+        theme: ThemeData(
+          colorSchemeSeed: controller.colorSeed(),
+          useMaterial3: true,
+        ),
+        darkTheme: ThemeData(
+          brightness: Brightness.dark,
+          colorSchemeSeed: controller.colorSeed(),
+          useMaterial3: true,
+        ),
 
-          themeMode: ThemeMode.values[controller.theme().index],
+        themeMode: ThemeMode.values[controller.theme().index],
 
-          routerConfig: router,
-        ));
+        routerConfig: router,
+      ),
+    );
   }
 }
