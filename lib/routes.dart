@@ -14,17 +14,6 @@ final MainController _controller = Get.find();
 final _rootNavigationKey = GlobalKey<NavigatorState>();
 final _shellNavigationKey = GlobalKey<NavigatorState>();
 
-final List<Widget> children = <Widget>[
-  for (int i = 0; i < 10; i++)
-    Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        color: const Color.fromARGB(255, 255, 201, 197),
-        height: 400,
-      ),
-    )
-];
-
 class _destination {
   late String path;
   late String name;
