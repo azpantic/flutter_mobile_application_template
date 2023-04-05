@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobile_application_template/i18n/strings.g.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +15,7 @@ class HomePage extends GetView<void> {
           child: Container(
             height: context.mediaQueryShortestSide / 2,
             color: context.theme.colorScheme.primary,
-            child: AspectRatio(
+            child: const AspectRatio(
               aspectRatio: 1,
             ),
           ),

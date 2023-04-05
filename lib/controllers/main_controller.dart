@@ -1,4 +1,3 @@
-import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:flutter_mobile_application_template/models/settings.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
