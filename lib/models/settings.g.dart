@@ -15,7 +15,8 @@ extension GetSettingsCollection on Isar {
 
 const SettingsSchema = CollectionSchema(
   name: r'Settings',
-  id: -8656046621518759136,
+  // id: -8656046621518759136,
+  id: 1,
   properties: {
     r'colorSeed': PropertySchema(
       id: 0,

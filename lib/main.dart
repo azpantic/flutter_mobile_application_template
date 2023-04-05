@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_mobile_application_template/database_init.dart';
 import 'package:get/get.dart';
 
 import 'controllers/main_controller.dart';
@@ -8,7 +9,8 @@ import 'i18n/strings.g.dart';
 import 'routes.dart';
 
 Future<void> main() async {
-  Get.put(MainController(), permanent: true);
+  final mainController = await initMainController();
+  Get.put(mainController, permanent: true);
 
   WidgetsFlutterBinding.ensureInitialized();
   // settingsData!.lang == null
@@ -44,16 +46,20 @@ class MyApp extends GetView<MainController> {
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
           theme: ThemeData(
-            colorSchemeSeed: Color(controller.settings().colorSeed),
+            colorSchemeSeed: controller.colorSeed(),
             useMaterial3: true,
           ),
           darkTheme: ThemeData(
             brightness: Brightness.dark,
-            colorSchemeSeed: Color(controller.settings().colorSeed),
+            colorSchemeSeed: controller.colorSeed(),
             useMaterial3: true,
           ),
 
-          themeMode: ThemeMode.values[controller.settings().theme.index],
+          themeMode: controller.isSystemTheme()
+              ? ThemeMode.system
+              : controller.isDarkMode()
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
 
           routerConfig: router,
         ));

@@ -27,12 +27,11 @@ class SeedColorToogle extends GetView<MainController> {
                           // containedInkWell: true,
                           radius: 0,
                           onTap: () {
-                            controller.settings
-                                .update((val) => val?.isStaticColor = false);
+                            controller.isStaticColor(false);
                           },
                           child: Obx(
                             () => Card(
-                              color: (!controller.settings().isStaticColor
+                              color: (!controller.isStaticColor()
                                   ? Theme.of(context).colorScheme.primary
                                   : Theme.of(context).colorScheme.background),
                               shape: RoundedRectangleBorder(
@@ -41,7 +40,7 @@ class SeedColorToogle extends GetView<MainController> {
                               ),
                               child: Icon(
                                 Icons.color_lens,
-                                color: !controller.settings().isStaticColor
+                                color: !controller.isStaticColor()
                                     ? context.theme.colorScheme.onPrimary
                                     : context.theme.colorScheme.onBackground,
                               ),
@@ -65,12 +64,11 @@ class SeedColorToogle extends GetView<MainController> {
                         child: InkResponse(
                           radius: 0,
                           onTap: () {
-                            controller.settings
-                                .update((val) => val?.isStaticColor = true);
+                            controller.isStaticColor(true);
                           },
                           child: Obx(
                             () => Card(
-                              color: (controller.settings().isStaticColor
+                              color: (controller.isStaticColor()
                                   ? Theme.of(context).colorScheme.primary
                                   : Theme.of(context).colorScheme.background),
                               shape: RoundedRectangleBorder(
@@ -79,7 +77,7 @@ class SeedColorToogle extends GetView<MainController> {
                               ),
                               child: Icon(
                                 Icons.color_lens,
-                                color: controller.settings().isStaticColor
+                                color: controller.isStaticColor()
                                     ? context.theme.colorScheme.onPrimary
                                     : context.theme.colorScheme.onBackground,
                               ),
@@ -94,14 +92,14 @@ class SeedColorToogle extends GetView<MainController> {
               ),
             ],
           ),
-          if (controller.settings().isStaticColor)
+          if (controller.isStaticColor())
             Padding(
               padding: const EdgeInsets.all(appPadding),
               child: Text(
                 t.settings.static_color_picker,
               ),
             ),
-          if (controller.settings().isStaticColor)
+          if (controller.isStaticColor())
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: List.generate(
@@ -111,8 +109,9 @@ class SeedColorToogle extends GetView<MainController> {
                     padding: const EdgeInsets.all(appPadding / 2),
                     child: InkResponse(
                       onTap: () {
-                        controller.settings.update((val) =>
-                            val?.colorSeed = staticColorAccent[index].value);
+                        controller.colorSeed(
+                          staticColorAccent[index],
+                        );
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -121,8 +120,8 @@ class SeedColorToogle extends GetView<MainController> {
                         ),
                         child: AspectRatio(
                           aspectRatio: 1,
-                          child: (staticColorAccent[index].value ==
-                                  controller.settings().colorSeed
+                          child: (staticColorAccent[index] ==
+                                  controller.colorSeed()
                               ? const Icon(Icons.check)
                               : null),
                         ),
