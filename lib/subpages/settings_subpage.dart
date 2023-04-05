@@ -19,39 +19,24 @@ class SettingsSubpage extends GetView<MainController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            ExpansionTile(
-              title: Text(
-                t.settings.general_settings,
-              ),
-              trailing: const Icon(Icons.settings),
-              children: [
-                Text(t.settings.language),
-              ],
+            Text(
+              t.settings.theme_mode,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            ExpansionTile(
-              title: Text(t.settings.visual_settings),
-              trailing: const Icon(Icons.color_lens),
-              children: [
-                Text(
-                  t.settings.theme_mode,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(appPadding),
-                  child: ThemeToggle(),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  t.settings.seed_color,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(appPadding),
-                  child: SeedColorToogle(),
-                ),
-              ],
+            const Padding(
+              padding: EdgeInsets.all(appPadding),
+              child: ThemeToggle(),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Text(
+              t.settings.seed_color,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            const Padding(
+              padding: EdgeInsets.all(appPadding),
+              child: SeedColorToogle(),
             ),
           ],
         ),
