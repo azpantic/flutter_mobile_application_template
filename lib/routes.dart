@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_adaptive_scaffold/flutter_adaptive_scaffold.dart';
 import 'package:flutter_mobile_application_template/subpages/settings_subpage.dart';
 
 import 'package:get/get.dart';
@@ -60,27 +59,23 @@ final router = GoRouter(
       // ShellRoute показывает UI-оболочку вокруг соответствующего дочернего маршрута
       builder: (context, state, child) {
         // UI-оболочка - это Scaffold с NavigationBar
-        return Obx(() => AdaptiveScaffold(
-              internalAnimations: true,
-              smallBreakpoint: const WidthPlatformBreakpoint(end: 700),
-              mediumBreakpoint:
-                  const WidthPlatformBreakpoint(begin: 700, end: 1000),
-              largeBreakpoint: const WidthPlatformBreakpoint(begin: 1000),
-              useDrawer: false,
-              selectedIndex: _controller.page(),
-              onSelectedIndexChange: (int index) {
-                _controller.page(index);
-                return context.go(
-                  _destinations[index].path,
-                );
-              },
-              destinations: _destinations
-                  .map((e) => NavigationDestination(
-                      icon: e.icon,
-                      selectedIcon: e.selectedIcon,
-                      label: e.name))
-                  .toList(),
-              body: (_) => child,
+        return Obx(() => Scaffold(
+              bottomNavigationBar: NavigationBar(
+                selectedIndex: _controller.page(),
+                onDestinationSelected: (index) {
+                  _controller.page(index);
+                  return context.go(
+                    _destinations[index].path,
+                  );
+                },
+                destinations: _destinations
+                    .map((e) => NavigationDestination(
+                        icon: e.icon,
+                        selectedIcon: e.selectedIcon,
+                        label: e.name))
+                    .toList(),
+              ),
+              body: child,
             ));
       },
       // Вложенные маршруты для каждой вкладки
