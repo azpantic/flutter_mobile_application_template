@@ -120,8 +120,8 @@ class SeedColorToogle extends GetView<MainController> {
                         ),
                         child: AspectRatio(
                           aspectRatio: 1,
-                          child: (staticColorAccent[index] ==
-                                  controller.colorSeed()
+                          child: (staticColorAccent[index].value ==
+                                  controller.colorSeed().value
                               ? const Icon(Icons.check)
                               : null),
                         ),

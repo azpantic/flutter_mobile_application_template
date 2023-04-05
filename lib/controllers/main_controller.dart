@@ -1,3 +1,4 @@
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
 import 'package:get/get.dart';
@@ -11,16 +12,37 @@ class MainController extends GetxService {
   var colorSeed = appColor.obs;
 
   final theme = themeMode.system.obs;
+  var lightColorScheme = ColorScheme.light().obs;
+  var darkColorScheme = ColorScheme.dark().obs;
+
+  void _setDynamic() async {
+    var colorPalette = await DynamicColorPlugin.getCorePalette();
+    if (colorPalette != null) {
+      lightColorScheme(colorPalette.toColorScheme());
+      darkColorScheme(colorPalette.toColorScheme(brightness: Brightness.dark));
+    } else {
+      var accent = await DynamicColorPlugin.getAccentColor();
+      lightColorScheme(ColorScheme.fromSeed(seedColor: accent ?? appColor));
+      darkColorScheme(ColorScheme.fromSeed(
+          seedColor: accent ?? appColor, brightness: Brightness.dark));
+    }
+  }
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     isStaticColor(Settings().isStaticColor.val);
     colorSeed(Color(Settings().colorSeed.val));
     theme(themeMode.values[Settings().themeModeIndex.val]);
     // ever(lang, (callback) => Settings().lang.val = callback);
     ever(colorSeed, (callback) => Settings().colorSeed.val = callback.value);
-    ever(isStaticColor, (callback) => Settings().isStaticColor.val = callback);
+    ever(isStaticColor, (callback) {
+      if (!callback) _setDynamic();
+      Settings().isStaticColor.val = callback;
+    });
     ever(theme, (callback) => Settings().themeModeIndex.val = callback.index);
+
+    if (!isStaticColor()) _setDynamic();
+
     super.onInit();
   }
 }

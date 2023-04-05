@@ -48,12 +48,17 @@ class MyApp extends GetView<MainController> {
         localizationsDelegates: GlobalMaterialLocalizations.delegates,
 
         theme: ThemeData(
-          colorSchemeSeed: controller.colorSeed(),
+          colorScheme: controller.isStaticColor()
+              ? ColorScheme.fromSeed(seedColor: controller.colorSeed())
+              : controller.lightColorScheme(),
           useMaterial3: true,
         ),
         darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          colorSchemeSeed: controller.colorSeed(),
+          colorScheme: controller.isStaticColor()
+              ? ColorScheme.fromSeed(
+                  seedColor: controller.colorSeed(),
+                  brightness: Brightness.dark)
+              : controller.darkColorScheme(),
           useMaterial3: true,
         ),
 
