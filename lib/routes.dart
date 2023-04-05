@@ -81,7 +81,7 @@ final router = GoRouter(
       // Вложенные маршруты для каждой вкладки
       routes: [
         GoRoute(
-          path: '/home',
+          path: _destinations[0].path,
           pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: const HomePage(),
@@ -89,7 +89,7 @@ final router = GoRouter(
           routes: const [],
         ),
         GoRoute(
-          path: '/custom',
+          path: _destinations[1].path,
           pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: const CastomPage(),
@@ -97,7 +97,7 @@ final router = GoRouter(
           routes: const [],
         ),
         GoRoute(
-          path: '/profile',
+          path: _destinations[2].path,
           pageBuilder: (context, state) => NoTransitionPage<void>(
             key: state.pageKey,
             child: const ProfilePage(),
