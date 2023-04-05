@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_mobile_application_template/database_init.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'controllers/main_controller.dart';
 import 'i18n/strings.g.dart';
 import 'routes.dart';
 
 Future<void> main() async {
-  final mainController = await initMainController();
-  Get.put(mainController, permanent: true);
+  await GetStorage.init();
+  Get.put(MainController());
 
   WidgetsFlutterBinding.ensureInitialized();
   // settingsData!.lang == null
@@ -55,11 +55,7 @@ class MyApp extends GetView<MainController> {
             useMaterial3: true,
           ),
 
-          themeMode: controller.isSystemTheme()
-              ? ThemeMode.system
-              : controller.isDarkMode()
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
+          themeMode: ThemeMode.values[controller.theme().index],
 
           routerConfig: router,
         ));

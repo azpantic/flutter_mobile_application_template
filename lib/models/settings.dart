@@ -1,17 +1,11 @@
-import 'package:flutter_mobile_application_template/constans.dart';
-import 'package:isar/isar.dart';
+import 'package:get_storage/get_storage.dart';
 
-import '../controllers/main_controller.dart';
+import '../constans.dart';
 
-part 'settings.g.dart';
-
-@collection
 class Settings {
-  Id id = Isar.autoIncrement;
-  String? lang;
-  bool isStaticColor = false;
-  int colorSeed = appColor.value;
-
-  @enumerated
-  themeMode theme = themeMode.system;
+  static final settings = () => GetStorage('Settings');
+  final lang = 'system'.val('lang');
+  final isStaticColor = false.val('isStaticColor');
+  final colorSeed = appColor.value.val('colorSeed');
+  final themeModeIndex = 0.val('themeModeIndex');
 }
