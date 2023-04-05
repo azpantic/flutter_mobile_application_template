@@ -26,6 +26,31 @@ final List<Widget> children = <Widget>[
     )
 ];
 
+class _destination {
+  late String path;
+  late String name;
+  late Icon icon;
+  late Icon selectedIcon;
+}
+
+final _destinations = <_destination>[
+  _destination()
+    ..path = '/home'
+    ..name = t.navbar.homepage
+    ..icon = const Icon(Icons.home_outlined)
+    ..selectedIcon = const Icon(Icons.home),
+  _destination()
+    ..path = '/custom'
+    ..name = t.navbar.castompage
+    ..icon = const Icon(Icons.library_books_outlined)
+    ..selectedIcon = const Icon(Icons.library_books),
+  _destination()
+    ..path = '/profile'
+    ..name = t.navbar.profile
+    ..icon = const Icon(Icons.person_2_outlined)
+    ..selectedIcon = const Icon(Icons.person_2),
+];
+
 final router = GoRouter(
   navigatorKey: _rootNavigationKey,
   initialLocation: '/home',
@@ -46,26 +71,15 @@ final router = GoRouter(
               onSelectedIndexChange: (int index) {
                 _controller.page(index);
                 return context.go(
-                  ['/home', '/custom', '/profile'][index],
+                  _destinations[index].path,
                 );
               },
-              destinations: <NavigationDestination>[
-                NavigationDestination(
-                  selectedIcon: const Icon(Icons.home),
-                  icon: const Icon(Icons.home_outlined),
-                  label: t.navbar.homepage,
-                ),
-                NavigationDestination(
-                  selectedIcon: const Icon(Icons.library_books),
-                  icon: const Icon(Icons.library_books_outlined),
-                  label: t.navbar.castompage,
-                ),
-                NavigationDestination(
-                  selectedIcon: const Icon(Icons.person_2),
-                  icon: const Icon(Icons.person_2_outlined),
-                  label: t.navbar.profile,
-                )
-              ],
+              destinations: _destinations
+                  .map((e) => NavigationDestination(
+                      icon: e.icon,
+                      selectedIcon: e.selectedIcon,
+                      label: e.name))
+                  .toList(),
               body: (_) => child,
             ));
       },
