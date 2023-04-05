@@ -1,19 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_mobile_application_template/constans.dart';
-import 'package:flutter_mobile_application_template/models/settings.dart';
 import 'package:get/get.dart';
-import 'package:isar/isar.dart';
 
-class MainController extends GetxController {
+import '../models/settings.dart';
+
+class MainController extends GetxService {
   RxInt page = 0.obs;
 
-  RxBool isDarkMode = true.obs;
-  RxBool isSystemTheme = false.obs;
-
   RxBool isStaticColor = true.obs;
-
   var colorSeed = appColor.obs;
 
-  // var themeMode = ThemeMode.system.obs;
+  final theme = themeMode.system.obs;
+
+  @override
+  void onInit() {
+    isStaticColor(Settings().isStaticColor.val);
+    colorSeed(Color(Settings().colorSeed.val));
+    theme(themeMode.values[Settings().themeModeIndex.val]);
+    // ever(lang, (callback) => Settings().lang.val = callback);
+    ever(colorSeed, (callback) => Settings().colorSeed.val = callback.value);
+    ever(isStaticColor, (callback) => Settings().isStaticColor.val = callback);
+    ever(theme, (callback) => Settings().themeModeIndex.val = callback.index);
+    super.onInit();
+  }
 }
 
 enum themeMode { system, light, dark }
